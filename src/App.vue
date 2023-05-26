@@ -20,28 +20,23 @@ export default {
         Navbar,
         PageViewer
     },
+    created() {
+        this.getPages();
+    },
     data() {
                 return {
                     activePage: 0,
-                    pages: [
-                    {
-                     link: {text: 'Home', URL: 'index.html'},
-                     pageTitle: 'Home Page',
-                     content: 'This is the home content'
-                    },
-                    {
-                      link: {text: 'About', URL: 'about.html'},
-                      pageTitle: 'About Page',
-                      content: 'This is the about content'
-                    },
-                    {
-                      link: {text: 'Contact', URL: 'contact.html'},
-                      pageTitle: 'Contact Page',
-                      content: 'This is the contact content'
-                    
-                    }
-                  ]
+                    pages: []
                 };
             },
+          methods: {
+            async getPages() {
+              let res =await fetch('pages.json');
+              let data =await res.json();
+
+              this.pages = data;
+
+            }
+          }
 }
 </script>

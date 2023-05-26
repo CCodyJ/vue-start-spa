@@ -8,15 +8,11 @@
                     <div class="collapse navbar-collapse" id="collapsibleNavId">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li v-for="(page, index) in pages" class="nav-item active" :key="index">
-                                <a 
-                                    class="nav-link"
-                                    :class="{active: activePage == index}" 
-                                    :href="page.link.URL"
-                                    :title="`This link goes to the ${page.link.text} page`"
-                                    @click.prevent="navLinkClick(index)"
-                                    >{{ page.link.text }}
-                                    <span class="sr-only">(current)</span>
-                                </a>
+                               <navbar-link
+                                :page="page"
+                                :isActive="activePage === index"
+                                @click.prevent="navLinkClick(index)"
+                               ></navbar-link>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -42,8 +38,13 @@
 
 
 <script>
+import NavbarLink from './NavbarLink.vue';
+
 export default 
     {
+            components: {
+                NavbarLink
+            },
             props: ['pages', 'activePage', 'navLinkClick'],
             computed: {
                 navbarClasses() {
