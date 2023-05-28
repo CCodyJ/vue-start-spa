@@ -47,6 +47,7 @@ export default
             },
             created() {
                 this.getNavClassSetting();
+                this.storeNavClassSetting();
             },
             props: ['pages', 'activePage', 'navLinkClick'],
             computed: {
@@ -63,18 +64,26 @@ export default
                 return {
                     useDarkNavbar: false,
                 }
-                this.storeNavClasses();
             },
-
-           
-            storeNavClassSetting() {
-                localStorage.setItem('navbarClasses', this.navbarClasses);
+            watch: {
+                useDarkNavbar: {
+                    handler() {
+                        this.storeNavClassSetting();
+                    },
+                immediate: true
+                }
             },
-            getNavClassSetting() {
-                let navbarClasses = localStorage.getItem('navbarClasses');
-           
-                if (navbarClasses) {
-                    this.navbarClasses = navbarClasses;
+          
+            methods: {
+                storeNavClassSetting() {
+                    localStorage.setItem('useDarkNavbar', this.useDarkNavbar.toString());
+                },
+                getNavClassSetting() {
+                    let useDarkNavbar = localStorage.getItem('useDarkNavbar');
+            
+                    if (useDarkNavbar) {
+                        this.useDarkNavbar = useDarkNavbar === 'true';
+                    }
                 }
             }
         }

@@ -5,10 +5,6 @@
         :nav-link-click="(index) => activePage = index"
     ></navbar>
 
-    <div>
-        v-show="false"
-    </div>
-
     <page-viewer
         v-if="pages.length > 0"
         :page="pages[activePage]"
