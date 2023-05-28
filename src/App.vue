@@ -5,7 +5,12 @@
         :nav-link-click="(index) => activePage = index"
     ></navbar>
 
-    <page-viewer 
+    <div>
+        v-show="false"
+    </div>
+
+    <page-viewer
+        v-if="pages.length > 0"
         :page="pages[activePage]"
     ></page-viewer>
 </template>
@@ -31,8 +36,8 @@ export default {
             },
           methods: {
             async getPages() {
-              let res =await fetch('pages.json');
-              let data =await res.json();
+              let res = await fetch('pages.json');
+              let data = await res.json();
 
               this.pages = data;
 

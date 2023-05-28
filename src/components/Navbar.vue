@@ -45,6 +45,9 @@ export default
             components: {
                 NavbarLink
             },
+            created() {
+                this.getNavClassSetting();
+            },
             props: ['pages', 'activePage', 'navLinkClick'],
             computed: {
                 navbarClasses() {
@@ -54,12 +57,25 @@ export default
                         'navbar-dark': this.useDarkNavbar,
                         'bg-dark': this.useDarkNavbar
                     }
-                }
+                },
             },
             data() {
                 return {
                     useDarkNavbar: false,
                 }
+                this.storeNavClasses();
             },
+
+           
+            storeNavClassSetting() {
+                localStorage.setItem('navbarClasses', this.navbarClasses);
+            },
+            getNavClassSetting() {
+                let navbarClasses = localStorage.getItem('navbarClasses');
+           
+                if (navbarClasses) {
+                    this.navbarClasses = navbarClasses;
+                }
+            }
         }
 </script>

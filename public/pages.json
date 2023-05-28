@@ -1,16 +1,17 @@
-[{
-    link: {text: 'Home', URL: 'index.html'},
-    pageTitle: 'Home Page',
-    content: 'This is the home content'
-   },
-   {
-     link: {text: 'About', URL: 'about.html'},
-     pageTitle: 'About Page',
-     content: 'This is the about content'
-   },
-   {
-     link: {text: 'Contact', URL: 'contact.html'},
-     pageTitle: 'Contact Page',
-     content: 'This is the contact content'
-   
-   }]
+[
+  {
+    "link": { "text": "Home", "URL": "index.html" },
+    "pageTitle": "Home Page",
+    "content": "This is the home content"
+  },
+  {
+    "link": { "text": "About", "URL": "about.html" },
+    "pageTitle": "About Page",
+    "content": "This is the about content"
+  },
+  {
+    "link": { "text": "Contact", "URL": "contact.html" },
+    "pageTitle": "Contact Page",
+    "content": "This is the contact content"
+  }
+]
