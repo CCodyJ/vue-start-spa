@@ -1,17 +1,20 @@
 <template>
+    <li>
      <a
         class="nav-link"
         :class="activeClases" 
         :href="page.link.URL"
         :title="`This link goes to the ${page.link.text} page`"
+        @click.prevent="$bus.$emit('navbarLinkActivated', index )"
         >{{ page.link.text }}
         <span class="sr-only">(current)</span>
     </a>
+</li>
 </template>
 
 <script>
 export default {
-    props: ['page', 'isActive'],
+    props: ['page', 'index', 'isActive'],
     computed: {
         activeClases() {
             return {

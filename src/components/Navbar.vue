@@ -7,16 +7,16 @@
                         aria-expanded="false" aria-label="Toggle navigation"></button>
                     <div class="collapse navbar-collapse" id="collapsibleNavId">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li v-for="(page, index) in pages" class="nav-item active" :key="index">
-                               <navbar-link
+                            <navbar-link
+                                v-for="(page, index) in publishedPages" class="nav-item active" :key="index"
                                 :page="page"
-                                :isActive="activePage === index"
-                                @click.prevent="navLinkClick(index)"
-                               ></navbar-link>
-                            </li>
+                                :index="index"
+                                :isActive="activePage == index"
+                                @activated="$emit('activated')"
+                            ></navbar-link>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownId">
                                     <a class="dropdown-item" href="#">Action 1</a>
                                     <a class="dropdown-item" href="#">Action 2</a>
                                 </div>
@@ -25,7 +25,7 @@
                         <form class="d-flex">
                             <button 
                                 class="btn btn-primary"
-                                @click.prevent="useDarkNavbar = !useDarkNavbar"
+                                @click.prevent="toggleNavbarColor()"
                                 >{{ useDarkNavbar ? 'Toggle Light' : 'Toggle Dark' }}</button>
                         </form>
                         <form class="form-inline my-2 my-lg-0">
@@ -47,9 +47,9 @@ export default
             },
             created() {
                 this.getNavClassSetting();
-                this.storeNavClassSetting();
             },
-            props: ['pages', 'activePage', 'navLinkClick'],
+
+            props: ['pages', 'activePage'],
             computed: {
                 navbarClasses() {
                     return {
@@ -59,32 +59,32 @@ export default
                         'bg-dark': this.useDarkNavbar
                     }
                 },
+                publishedPages () {
+                    return this.pages.filter(p => p.published);
+                }
             },
             data() {
                 return {
                     useDarkNavbar: false,
                 }
             },
-            watch: {
-                useDarkNavbar: {
-                    handler() {
-                        this.storeNavClassSetting();
-                    },
-                immediate: true
-                }
-            },
-          
+            mounted() {
+    this.getNavClassSetting();
+  },
             methods: {
-                storeNavClassSetting() {
-                    localStorage.setItem('useDarkNavbar', this.useDarkNavbar.toString());
+                toggleNavbarColor() {
+                    this.useDarkNavbar = !this.useDarkNavbar;
+                    this.storeNavClassSetting();
                 },
-                getNavClassSetting() {
-                    let useDarkNavbar = localStorage.getItem('useDarkNavbar');
-            
-                    if (useDarkNavbar) {
-                        this.useDarkNavbar = useDarkNavbar === 'true';
+                    storeNavClassSetting() {
+                    localStorage.setItem('useDarkNavbar', JSON.stringify(this.useDarkNavbar));
+                },
+                    getNavClassSetting() {
+                    const useDarkNavbar = JSON.parse(localStorage.getItem('useDarkNavbar'));
+                    if (useDarkNavbar !== null) {
+                    this.useDarkNavbar = useDarkNavbar;
+                        }
                     }
                 }
-            }
-        }
+            };
 </script>
