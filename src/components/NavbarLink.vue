@@ -1,7 +1,7 @@
 <template>
     <li>
      <router-link
-        to="`/${index}`"
+        :to="`/${index}`"
         class="nav-link"
         :class="activeClases"  
         :title="`This link goes to the ${page.link.text} page`"
