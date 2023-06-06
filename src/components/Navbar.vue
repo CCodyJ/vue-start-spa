@@ -14,6 +14,16 @@
                                 :isActive="activePage == index"
                                 @activated="$emit('activated')"
                             ></navbar-link>
+
+                            <li>
+                                <router-link
+                                    to="/create"
+                                    class="nav-link"
+                                    > Create Page
+                                    <span class="sr-only">(current)</span>
+                                </router-link>
+                            </li>
+
                             <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownId">

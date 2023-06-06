@@ -1,14 +1,13 @@
 <template>
     <li>
-     <a
+     <router-link
+        to="`/${index}`"
         class="nav-link"
-        :class="activeClases" 
-        :href="page.link.URL"
+        :class="activeClases"  
         :title="`This link goes to the ${page.link.text} page`"
-        @click.prevent="$bus.$emit('navbarLinkActivated', index )"
         >{{ page.link.text }}
         <span class="sr-only">(current)</span>
-    </a>
+    </router-link>
 </li>
 </template>
 
