@@ -11,14 +11,14 @@
                                 v-for="(page, index) in publishedPages" class="nav-item active" :key="index"
                                 :page="page"
                                 :index="index"
-                                :isActive="activePage == index"
-                                @activated="$emit('activated')"
+                               
                             ></navbar-link>
 
                             <li>
                                 <router-link
                                     to="/create"
                                     class="nav-link"
+                                    active-class="active"
                                     > Create Page
                                     <span class="sr-only">(current)</span>
                                 </router-link>
@@ -57,9 +57,10 @@ export default
             },
             created() {
                 this.getNavClassSetting();
+
+                this.pages = this.$pages.getAllPages();
             },
 
-            props: ['pages', 'activePage'],
             computed: {
                 navbarClasses() {
                     return {
@@ -76,6 +77,7 @@ export default
             data() {
                 return {
                     useDarkNavbar: false,
+                    data: []
                 }
             },
             mounted() {

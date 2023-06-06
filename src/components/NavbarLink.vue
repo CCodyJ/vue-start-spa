@@ -3,7 +3,7 @@
      <router-link
         :to="`/${index}`"
         class="nav-link"
-        :class="activeClases"  
+        active-class="active emphasize"  
         :title="`This link goes to the ${page.link.text} page`"
         >{{ page.link.text }}
         <span class="sr-only">(current)</span>
@@ -13,19 +13,7 @@
 
 <script>
 export default {
-    props: ['page', 'index', 'isActive'],
-    computed: {
-        activeClases() {
-            return {
-                active: this.isActive,
-                emphasize: this.isActive
-            };
-        }
-    }
+    props: ['page', 'index']
+    
 }
 </script>
-<style scoped>
-    .emphasize {
-        text-decoration: underline !important;
-    }
-</style>
