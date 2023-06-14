@@ -16,11 +16,10 @@
 
                             <li>
                                 <router-link
-                                    to="/create"
+                                    to="/pages"
                                     class="nav-link"
                                     active-class="active"
-                                    > Create Page
-                                    <span class="sr-only">(current)</span>
+                                    >Pages
                                 </router-link>
                             </li>
 
@@ -55,10 +54,21 @@ export default
             components: {
                 NavbarLink
             },
+            inject: ['$pages', '$bus'],
             created() {
                 this.getNavClassSetting();
 
                 this.pages = this.$pages.getAllPages();
+
+                this.$bus.$on('page-updated', () => {
+                    this.pages = [...this.$pages.getAllPages()];
+                });
+                this.$bus.$on('page-created', () => {
+                    this.pages = [...this.$pages.getAllPages()];
+                });
+                this.$bus.$on('page-deleted', () => {
+                    this.pages = [...this.$pages.getAllPages()];
+                });
             },
 
             computed: {

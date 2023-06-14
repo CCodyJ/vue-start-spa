@@ -6,7 +6,6 @@
         active-class="active emphasize"  
         :title="`This link goes to the ${page.link.text} page`"
         >{{ page.link.text }}
-        <span class="sr-only">(current)</span>
     </router-link>
 </li>
 </template>
